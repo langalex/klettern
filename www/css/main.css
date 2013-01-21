@@ -2,6 +2,20 @@ body {
   padding-bottom: 800px;
 }
 
+#track-list li {
+  margin: 0 0 10px 0;
+}
+
+.rating-color {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  margin-bottom: -5px;
+  border: 1px solid silver;
+}
+
+
 /* ==========================================================================
    Hoodie Sign In / Sign Up / Sign out stylings
    ========================================================================== */

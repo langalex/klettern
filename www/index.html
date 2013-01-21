@@ -99,7 +99,12 @@
     </script>
 
     <script id="track-list-item-template" type="text/x-handlebars-template">
-      <li><a href="{{id}}">{{name}}</a></li>
+      <li class="rating-{{rating}}">
+        <a href="{{id}}">
+          <span class="rating-color" style="background-color: {{rating}}"></span>
+          {{name}} ({{rating}})
+        </a>
+      </li>
     </script>
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
