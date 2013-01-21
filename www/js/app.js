@@ -8,7 +8,7 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
 (function() {
   var $container = $('#container'),
-    $nav = $('#nav'),
+    $nav = $('.navbar'),
     store = hoodie.store,
     templates = {
       trackList: Handlebars.compile($("#track-list-template").html()),

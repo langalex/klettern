@@ -14,55 +14,21 @@
     <script src="js/vendor/modernizr-2.6.1.min.js"></script>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-static-top navbar-inverse">
       <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Klettern</a>
-
-          <div id="hoodieAccountBar" class="hoodie-accountbar pull-right">
-            <div class="hoodie-account-signedout">
-              <a href="#hoodieAccountModal" data-toggle="modal" class="btn btn-small btn-inverse">
-                Sign In / Sign Up
-              </a>
-            </div><!-- /.hoodie-account-signedout -->
-            <div class="hoodie-account-signedin">
-              Hello,
-              <span class="hoodie-username"><!-- usern name will be filled in here --></span>
-              <span class="btn-group">
-                <button class="hoodie-signout btn btn-small btn-inverse" data-hoodie-action="account-signout">Sign Out</button>
-                <button class="btn btn-small dropdown-toggle btn-inverse" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#hoodieAccountModal" data-toggle="modal" data-hoodie-action="account-changepassword">Change Password</a></li>
-                  <li><a href="#hoodieAccountModal" data-toggle="modal" data-hoodie-action="account-changeusername">Change Username</a></li>
-                  <li><a href="#" data-hoodie-action="account-destroy">Destroy Account</a></li>
-                </ul>
-              </span>
-            </div><!-- /.hoodie-signed-out -->
-            <div class="hoodie-account-error">
-              Hello,
-              <span class="hoodie-username"><!-- usern name will be filled in here --></span>.
-              <a href="#hoodieAccountModal" data-toggle="modal" class="btn btn-small btn-inverse">
-                Error: reauthenticate
-              </a>
-            </div><!-- /.hoodie-account-error -->
-          </div><!--/hoodieAccountBar -->
-        </div>
-
+        <a class="brand" href="#">Klettern</a>
+        <ul class="nav">
+          <li class="active">
+            <a href="#" rel="track-list">All Tracks</a>
+          </li>
+          <li>
+            <a href="#" rel="new-track">New Track</a>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="container-fluid main">
-      <div id="nav">
-        <a class="btn" rel="track-list">All Tracks</a>
-        <a class="btn" rel="new-track">New Track</a>
-      </div>
       <div id="container">
         <div id="new-track-container"></div>
         <div id="track-list-container"></div>
