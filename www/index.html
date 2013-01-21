@@ -42,17 +42,18 @@
 
     <script id="new-track-template" type="text/x-handlebars-template">
       <form id="new-track-form">
-        <label>
-          Name
-          <input name="name"/>
-        </label>
-        Rating
-        <label><input type="radio" name="rating" value="yellow"> Yellow</label>
-        <label><input type="radio" name="rating" value="blue"> Blue</label>
-        <label><input type="radio" name="rating" value="blue"> Green</label>
-        <label><input type="radio" name="rating" value="red"> Red</label>
-        <label><input type="radio" name="rating" value="gray"> Gray</label>
-        <input type="submit" value="Add Track"/>
+        <fieldset>
+          <legend>Add Track</legend>
+          <input name="name" placeholder="Name" />
+          <br>
+          Rating
+          <label><input type="radio" name="rating" value="yellow"> Yellow</label>
+          <label><input type="radio" name="rating" value="blue"> Blue</label>
+          <label><input type="radio" name="rating" value="blue"> Green</label>
+          <label><input type="radio" name="rating" value="red"> Red</label>
+          <label><input type="radio" name="rating" value="gray"> Gray</label>
+          <input type="submit" class="btn" value="Add Track"/>
+        </fieldset>
       </form>
     </script>
 
