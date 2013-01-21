@@ -41,7 +41,7 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
       var $form = $(this);
       var track = {
         name: $form.find('[name=name]').val(),
-        rating: $form.find('[name=rating]').val()
+        rating: $form.find('[name=rating]:checked').val()
       };
       store.add('track', track);
       showContainer(containers.trackList);
