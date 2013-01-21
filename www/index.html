@@ -14,7 +14,7 @@
     <script src="js/vendor/modernizr-2.6.1.min.js"></script>
   </head>
   <body>
-    <div class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <a class="brand" href="#">Klettern</a>
         <ul class="nav">
@@ -65,10 +65,11 @@
     </script>
 
     <script id="track-list-item-template" type="text/x-handlebars-template">
-      <tr class="track-list-item">
+      <tr class="track-list-item" id="track-{{id}}">
         <td style="width: 30px"><span class="rating-color" style="background-color: {{rating}}"></span></td>
-        <td><a href="{{id}}" rel="track">{{name}}</a></td>
+        <td><a href="{{id}}" rel="track-show">{{name}}</a></td>
         <td>{{rating}}</td>
+        <td><a href="{{id}}" rel="track-remove" class="btn btn-danger btn-small">Remove</a></td>
       </tr>
     </script>
 

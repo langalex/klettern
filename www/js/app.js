@@ -65,19 +65,29 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
     store.on('add:track', function(track) {
       $('#track-list').append(templates.trackListItem(track));
     });
+    store.on('remove:track', function(track) {
+      $('#track-list #track-' + track.id).remove();
+    });
 
-    $container.on('click', '.track-list-item', function(e) {
-      var trackId = $(this).find('a[rel=track]').attr('href');
+    $container.on('click', '.track-list-item a[rel=track-show]', function(e) {
       e.preventDefault();
+      var trackId = $(this).attr('href');
       showTrackListItem(trackId);
+    });
+
+    $container.on('click', '.track-list-item a[rel=track-remove]', function(e) {
+      e.preventDefault();
+      var trackId = $(this).attr('href');
+      store.remove('track', trackId);
     });
   }
 
   function showTrackListItem(trackId) {
+    $nav.find('li').removeClass('active');
+
     store.find('track', trackId).done(function(track) {
       showContainer(containers.track, templates.track(track));
     });
-
   }
 
   function loadTracks() {
