@@ -57,6 +57,14 @@ html[data-hoodie-account-status=signedout] .hoodie-account-signedout {
   margin-top: 80px;
 }
 
+.climbs .climbed {
+  color: green;
+}
+
+.climbs .failed {
+  color: red;
+}
+
 /* END TMP */
 
 

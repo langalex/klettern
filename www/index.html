@@ -38,6 +38,22 @@
 
     <script id="track-template" type="text/x-handlebars-template">
       <h2>{{name}}</h2>
+      <form id="new-climb-form" data-track-id="{{id}}">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success btn-large" rel="climbed">Climbed it</button>
+          <button type="submit" class="btn btn-large" rel="failed">Failed</button>
+        </div>
+      </form>
+      <h3>History</h3>
+      <ul rel="previous-climbs" class="climbs">
+        {{#each climbs}}
+          {{render_handlebars "climb-list-item-template"}}
+        {{/each}}
+      </ul>
+    </script>
+
+    <script id="climb-list-item-template" type="text/x-handlebars-template">
+      <li class="{{status}}">{{$createdAt}}</li>
     </script>
 
     <script id="new-track-template" type="text/x-handlebars-template">

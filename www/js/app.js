@@ -14,7 +14,8 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
       trackList: Handlebars.compile($("#track-list-template").html()),
       newTrackForm: Handlebars.compile($("#new-track-template").html()),
       trackListItem: Handlebars.compile($("#track-list-item-template").html()),
-      track: Handlebars.compile($("#track-template").html())
+      track: Handlebars.compile($("#track-template").html()),
+      climbListItem: Handlebars.compile($('#climb-list-item-template').html())
     },
     containers = {
       trackList: $container.find('#track-list-container'),
@@ -26,6 +27,22 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
   initTrackForm();
   initTrackList();
   loadTracks();
+  initClimbForm();
+
+  function initClimbForm() {
+    $container.on('click', '#new-climb-form button[rel=climbed], #new-climb-form button[rel=failed]', function(e) {
+      e.preventDefault();
+      var trackId = $(this).closest('[data-track-id]').data('track-id'),
+        status = $(this).attr('rel');
+      store.add('climb', {status: status, trackId: trackId});
+
+      return false;
+    });
+
+    store.on('add:climb', function(climb) {
+      containers.track.find('[rel=previous-climbs]').prepend(templates.climbListItem(climb));
+    });
+  }
 
   function showContainer(container, html) {
     $container.children().hide();
@@ -84,10 +101,23 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
   function showTrackListItem(trackId) {
     $nav.find('li').removeClass('active');
+    $.when(findTrack(trackId), findClimbs(trackId)).then(function(track, climbs) {
+      showContainer(containers.track, templates.track($.extend(track, {climbs: climbs.sort(byCreatedAt)})));
 
-    store.find('track', trackId).done(function(track) {
-      showContainer(containers.track, templates.track(track));
+      function byCreatedAt(a, b) {
+        return b.$createdAt - a.$createdAt;
+      }
     });
+
+    function findTrack(trackId) {
+      return store.find('track', trackId);
+    }
+
+    function findClimbs(trackId) {
+      return store.findAll(function (object) {
+        return object.trackId === trackId;
+      });
+    }
   }
 
   function loadTracks() {
