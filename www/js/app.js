@@ -92,7 +92,12 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
   function loadTracks() {
     store.findAll('track').done(function(tracks) {
-      showContainer(containers.trackList, templates.trackList({tracks: tracks}));
+      showContainer(containers.trackList, templates.trackList({
+        tracks: tracks.sort(byName)}));
     });
+
+    function byName(a, b) {
+      return a.name.toLowerCase() > b.name.toLowerCase();
+    }
   }
 })();
