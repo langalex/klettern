@@ -8,17 +8,21 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
 (function() {
   var $container = $('#container'),
+    $nav = $('#nav'),
     store = hoodie.store,
     templates = {
       trackList: Handlebars.compile($("#track-list-template").html()),
       newTrackForm: Handlebars.compile($("#new-track-template").html()),
-      trackListItem: Handlebars.compile($("#track-list-item-template").html())
+      trackListItem: Handlebars.compile($("#track-list-item-template").html()),
+      track: Handlebars.compile($("#track-template").html())
     },
     containers = {
       trackList: $container.find('#track-list-container'),
-      newTrack: $container.find('#new-track-container')
+      newTrack: $container.find('#new-track-container'),
+      track: $container.find('#track-container')
     };
 
+  initNavigation();
   initTrackForm();
   initTrackList();
   loadTracks();
@@ -31,11 +35,16 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
     container.show();
   }
 
-  function initTrackForm() {
-    $('#new-track').on('click', function() {
+  function initNavigation() {
+    $nav.find('a[rel=new-track]').on('click', function() {
       showContainer(containers.newTrack, templates.newTrackForm());
     });
+    $nav.find('a[rel=track-list]').on('click', function() {
+      loadTracks();
+    });
+  }
 
+  function initTrackForm() {
     $container.on('submit', '#new-track-form', function(e) {
       e.preventDefault();
       var $form = $(this);
@@ -52,6 +61,19 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
     store.on('add:track', function(track) {
       $('#track-list').append(templates.trackListItem(track));
     });
+
+    $container.on('click', '.track-list-item', function(e) {
+      var trackId = $(this).find('a[rel=track]').attr('href');
+      e.preventDefault();
+      showTrackListItem(trackId);
+    });
+  }
+
+  function showTrackListItem(trackId) {
+    store.find('track', trackId).done(function(track) {
+      showContainer(containers.track, templates.track(track));
+    });
+
   }
 
   function loadTracks() {

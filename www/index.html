@@ -60,14 +60,19 @@
 
     <div class="container-fluid main">
       <div id="nav">
-        <a class="btn" id="new-track">New Track</a>
+        <a class="btn" rel="track-list">All Tracks</a>
+        <a class="btn" rel="new-track">New Track</a>
       </div>
       <div id="container">
         <div id="new-track-container"></div>
         <div id="track-list-container"></div>
+        <div id="track-container"></div>
       </div>
     </div>
 
+    <script id="track-template" type="text/x-handlebars-template">
+      <h2>{{name}}</h2>
+    </script>
 
     <script id="new-track-template" type="text/x-handlebars-template">
       <form id="new-track-form">
@@ -95,8 +100,8 @@
     </script>
 
     <script id="track-list-item-template" type="text/x-handlebars-template">
-      <li class="rating-{{rating}}">
-        <a href="{{id}}">
+      <li class="track-list-item">
+        <a href="{{id}}" rel="track">
           <span class="rating-color" style="background-color: {{rating}}"></span>
           {{name}} ({{rating}})
         </a>
