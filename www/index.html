@@ -44,15 +44,17 @@
       <form id="new-track-form">
         <fieldset>
           <legend>Add Track</legend>
-          <input name="name" placeholder="Name" />
-          <br>
+          <input class="input-xlarge" name="name" placeholder="Name" />
+          <br><br>
           Rating
-          <label><input type="radio" name="rating" value="yellow"> Yellow</label>
-          <label><input type="radio" name="rating" value="blue"> Blue</label>
-          <label><input type="radio" name="rating" value="blue"> Green</label>
-          <label><input type="radio" name="rating" value="red"> Red</label>
+          <label class="radio"><input type="radio" name="rating" value="yellow"> Yellow</label>
+          <label class="radio"><input type="radio" name="rating" value="blue"> Blue</label>
+          <label class="radio"><input type="radio" name="rating" value="blue"> Green</label>
+          <label class="radio"><input type="radio" name="rating" value="red"> Red</label>
           <label><input type="radio" name="rating" value="gray"> Gray</label>
-          <input type="submit" class="btn" value="Add Track"/>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-block btn-primary">Add Track</button>
+          </div>
         </fieldset>
       </form>
     </script>
