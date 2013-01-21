@@ -57,8 +57,7 @@
     </script>
 
     <script id="track-list-template" type="text/x-handlebars-template">
-      <h2>Tracks</h2>
-      <ul id="track-list">
+      <table class="table table-bordered table-striped" id="track-list">
         {{#each tracks}}
           {{render_handlebars "track-list-item-template"}}
         {{/each}}
@@ -66,12 +65,11 @@
     </script>
 
     <script id="track-list-item-template" type="text/x-handlebars-template">
-      <li class="track-list-item">
-        <a href="{{id}}" rel="track">
-          <span class="rating-color" style="background-color: {{rating}}"></span>
-          {{name}} ({{rating}})
-        </a>
-      </li>
+      <tr class="track-list-item">
+        <td style="width: 30px"><span class="rating-color" style="background-color: {{rating}}"></span></td>
+        <td><a href="{{id}}" rel="track">{{name}}</a></td>
+        <td>{{rating}}</td>
+      </tr>
     </script>
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
