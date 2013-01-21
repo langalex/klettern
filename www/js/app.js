@@ -13,16 +13,27 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
       trackList: Handlebars.compile($("#track-list-template").html()),
       newTrackForm: Handlebars.compile($("#new-track-template").html()),
       trackListItem: Handlebars.compile($("#track-list-item-template").html())
+    },
+    containers = {
+      trackList: $container.find('#track-list-container'),
+      newTrack: $container.find('#new-track-container')
     };
 
   initTrackForm();
   initTrackList();
   loadTracks();
 
+  function showContainer(container, html) {
+    $container.children().hide();
+    if(html) {
+      container.html(html);
+    }
+    container.show();
+  }
+
   function initTrackForm() {
     $('#new-track').on('click', function() {
-      hideAll();
-      $container.find('#new-track-container').html(templates.newTrackForm()).show();
+      showContainer(containers.newTrack, templates.newTrackForm());
     });
 
     $container.on('submit', '#new-track-form', function(e) {
@@ -33,8 +44,7 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
         rating: $form.find('[name=rating]').val()
       };
       store.add('track', track);
-      hideAll();
-      $container.find('#track-list-container').show();
+      showContainer(containers.trackList);
     });
   }
 
@@ -46,12 +56,7 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
   function loadTracks() {
     store.findAll('track').done(function(tracks) {
-      hideAll();
-      $container.find('#track-list-container').html(templates.trackList({tracks: tracks})).show();
+      showContainer(containers.trackList, templates.trackList({tracks: tracks}));
     });
-  }
-
-  function hideAll() {
-    $container.children().hide();
   }
 })();
