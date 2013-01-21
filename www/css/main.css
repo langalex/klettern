@@ -15,6 +15,11 @@ body {
   border: 1px solid silver;
 }
 
+#new-track-form [name=name] {
+  font-size: 180%;
+  line-height: 120%;
+}
+
 
 /* ==========================================================================
    Hoodie Sign In / Sign Up / Sign out stylings
@@ -49,7 +54,7 @@ html[data-hoodie-account-status=signedout] .hoodie-account-signedout {
 /* TMP */
 
 .main {
-  margin-top: 40px;
+  margin-top: 80px;
 }
 
 /* END TMP */
