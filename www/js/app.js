@@ -42,6 +42,10 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
     $nav.find('a[rel=track-list]').on('click', function() {
       loadTracks();
     });
+    $nav.find('a').on('click', function() {
+      $nav.find('li').removeClass('active');
+      $(this).parent('li').addClass('active');
+    });
   }
 
   function initTrackForm() {
