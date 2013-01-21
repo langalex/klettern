@@ -6,9 +6,18 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
   return new Handlebars.SafeString(subTemplate(subTemplateContext));
 });
 
+Handlebars.registerHelper('if_list', function(conditional, options) {
+  if(conditional.length) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
+
 (function() {
-  var $container = $('#container'),
-    $nav = $('.navbar'),
+  var $app = $('body'),
+    $container = $app.find('#container'),
+    $nav = $app.find('.navbar'),
     store = hoodie.store,
     templates = {
       trackList: Handlebars.compile($("#track-list-template").html()),
@@ -40,7 +49,7 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
     });
 
     store.on('add:climb', function(climb) {
-      containers.track.find('[rel=previous-climbs]').prepend(templates.climbListItem(climb));
+      showTrackListItem(climb.trackId);
     });
   }
 
@@ -53,13 +62,16 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
   }
 
   function initNavigation() {
-    $nav.find('a[rel=new-track]').on('click', function() {
+    $app.on('click', 'a[rel=new-track]', function(e) {
+      e.preventDefault();
       showContainer(containers.newTrack, templates.newTrackForm());
     });
-    $nav.find('a[rel=track-list]').on('click', function() {
+    $nav.find('a[rel=track-list]').on('click', function(e) {
+      e.preventDefault();
       loadTracks();
     });
-    $nav.find('a').on('click', function() {
+    $nav.find('a').on('click', function(e) {
+      e.preventDefault();
       $nav.find('li').removeClass('active');
       $(this).parent('li').addClass('active');
     });
@@ -80,10 +92,10 @@ Handlebars.registerHelper('render_handlebars', function(name, context) {
 
   function initTrackList() {
     store.on('add:track', function(track) {
-      $('#track-list').append(templates.trackListItem(track));
+      loadTracks();
     });
     store.on('remove:track', function(track) {
-      $('#track-list #track-' + track.id).remove();
+      loadTracks();
     });
 
     $container.on('click', '.track-list-item a[rel=track-show]', function(e) {

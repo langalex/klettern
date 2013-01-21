@@ -16,7 +16,7 @@
   <body>
     <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
-        <a class="brand" href="#">Klettern</a>
+        <a class="brand" href="/" rel="track-list">Klettern</a>
         <ul class="nav">
           <li class="active">
             <a href="#" rel="track-list">All Tracks</a>
@@ -45,11 +45,15 @@
         </div>
       </form>
       <h3>History</h3>
-      <ul rel="previous-climbs" class="climbs">
-        {{#each climbs}}
-          {{render_handlebars "climb-list-item-template"}}
-        {{/each}}
-      </ul>
+      {{#if_list climbs}}
+        <ul rel="previous-climbs" class="climbs">
+          {{#each climbs}}
+            {{render_handlebars "climb-list-item-template"}}
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>Not climbed yet.</p>
+      {{/if_list}}
     </script>
 
     <script id="climb-list-item-template" type="text/x-handlebars-template">
@@ -73,11 +77,17 @@
     </script>
 
     <script id="track-list-template" type="text/x-handlebars-template">
-      <table class="table table-bordered table-striped" id="track-list">
-        {{#each tracks}}
-          {{render_handlebars "track-list-item-template"}}
-        {{/each}}
-      </ul>
+      {{#if_list tracks}}
+        <table class="table table-bordered table-striped" id="track-list">
+          {{#each tracks}}
+            {{render_handlebars "track-list-item-template"}}
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>Klettern is an app to track how many tracks you have climbed.</p>
+        <p>You haven't added any tracks yet.</p>
+        <p><a href="#" class="btn btn-primary" rel="new-track">Add Track</a></p>
+      {{/if_list}}
     </script>
 
     <script id="track-list-item-template" type="text/x-handlebars-template">
