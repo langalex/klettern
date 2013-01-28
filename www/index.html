@@ -54,6 +54,7 @@
       {{else}}
         <p>Not climbed yet.</p>
       {{/if_list}}
+      <a href="{{id}}" rel="track-remove" class="btn btn-danger btn-small">Remove</a>
     </script>
 
     <script id="climb-list-item-template" type="text/x-handlebars-template">
@@ -95,7 +96,14 @@
         <td style="width: 30px"><span class="rating-color" style="background-color: {{rating}}"></span></td>
         <td><a href="{{id}}" rel="track-show">{{name}}</a></td>
         <td>{{rating}}</td>
-        <td><a href="{{id}}" rel="track-remove" class="btn btn-danger btn-small">Remove</a></td>
+        <td>
+     <form id="new-climb-form" data-track-id="{{id}}">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success" rel="climbed">Climbed it</button>
+          <button type="submit" class="btn" rel="failed">Failed</button>
+        </div>
+      </form>
+</td>
       </tr>
     </script>
 
